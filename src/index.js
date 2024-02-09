@@ -1,6 +1,6 @@
-import React from 'react';
-import ReactDOM  from 'react-dom/client';
-
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
 
 const pizzaData = [
   {
@@ -47,63 +47,77 @@ const pizzaData = [
   },
 ];
 
-
 function App() {
-    return (
-      <>
-        <Header />
-        <Menu />
-        <Footer />
-      </>
-    );
+  return (
+    <>
+      <Header />
+      <Menu />
+      <Footer />
+    </>
+  );
 }
 
-function Header() { 
+function Header() {
   return (
-    <div>
+    <header className="header">
       <h1>Fast React Pizza Co.</h1>
-    </div>
-  )
-};
-
-function Menu() { 
-  return (
-    <div>
-      <h2>Our Menus</h2>
-      <Pizza />
-      <Pizza />
-      <Pizza />
-      <Pizza />
-    </div>
+    </header>
   );
-};
+}
+
+function Menu() {
+  return (
+    <main className="menu">
+      <h2>Our Menus</h2>
+      <Pizza
+        name="Focaccia"
+        photoName="/pizzas/focaccia.jpg"
+        ingredients="Bread with italian olive oil and rosemary"
+        price="6"
+      />
+
+      <Pizza
+        name="Pizza Margherita"
+        photoName="/pizzas/margherita.jpg"
+        ingredients="Tomato and mozarella"
+        price="10"
+      />
+    </main>
+  );
+}
 function Footer() {
   const currentHour = new Date().getHours();
   const openHour = 10;
   const closeHour = 24;
-  if ( currentHour >= openHour && currentHour <= closeHour) alert("Open");
-  else alert("Sorry, We are Closed now!");
-  
+  const isOpen = currentHour >= openHour && currentHour <= closeHour;
+  console.log(isOpen);
+  // if ( currentHour >= openHour && currentHour <= closeHour) alert("Open");
+  // else alert("Sorry, We are Closed now!");
+
   return (
     <>
-      <footer>{new Date().toLocaleTimeString()}  We Are Currently Open</footer>
+      <footer className="footer">
+        {new Date().toLocaleTimeString()} We Are Currently Open
+      </footer>
     </>
   );
 }
-function Pizza() {
+function Pizza(props) {
   return (
-    <>
-      <img src="/pizzas/focaccia.jpg" alt="Focaccia Pizza" />
-      <p>ingredients : Bread with italian olive oil and rosemary </p>
-    </>
+    <div className="pizza">
+      <img src={props.photoName} alt={props.name} />
+      <div>
+        <h3>{props.name}</h3>
+        <p>{props.ingredients}</p>
+        <span>Price:{Number(props.price)+3}</span>
+      </div>
+    </div>
   );
-};
+}
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>
-)
-
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
