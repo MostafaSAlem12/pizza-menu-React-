@@ -38,13 +38,7 @@ const pizzaData = [
     photoName: "pizzas/salamino.jpg",
     soldOut: true,
   },
-  {
-    name: "Pizza Prosciutto",
-    ingredients: "Tomato, mozarella, ham, aragula, and burrata cheese",
-    price: 18,
-    photoName: "pizzas/prosciutto.jpg",
-    soldOut: false,
-  },
+  
 ];
 
 function App() {
@@ -69,11 +63,10 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our Menus</h2>
-      {pizzaData.map((pizza) => <Pizza
-        name={pizza.name}
-        ingredients={pizza.ingredients}
-        photoName={pizza.photoName}
-        price={ pizza.price} />)}
+      <ul className="pizzas">
+      {pizzaData.map((pizza) =>( <Pizza pizzaObj={pizza} key={pizza.name} />
+        ))}
+      </ul>
       {/* <Pizza
         name="Focaccia"
         photoName="/pizzas/focaccia.jpg"
@@ -109,14 +102,14 @@ function Footer() {
 }
 function Pizza(props) {
   return (
-    <>
-      <img src={props.photoName} alt={props.name} />
+    <li className="pizza">
+    <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
       <div>
-        <h3>{props.name}</h3>
-        <p>{props.ingredients}</p>
-        <span>Price:{Number(props.price)+3}</span>
+        <h3>{props.pizzaObj.name}</h3>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>Price:{Number(props.pizzaObj.price) + 3}</span>
       </div>
-      </>
+    </li>
   );
 }
 
