@@ -86,18 +86,23 @@ function Menu() {
 function Footer() {
   const currentHour = new Date().getHours();
   const openHour = 10;
-  const closeHour = 24;
+  const closeHour = 8;
   const isOpen = currentHour >= openHour && currentHour <= closeHour;
   console.log(isOpen);
   // if ( currentHour >= openHour && currentHour <= closeHour) alert("Open");
   // else alert("Sorry, We are Closed now!");
 
   return (
-    <>
-      <footer className="footer">
-        {new Date().toLocaleTimeString()} We Are Currently Open
-      </footer>
-    </>
+    <footer className="footer">
+      {isOpen && (
+        <div className="order">
+          <p>
+            We're open now until {closeHour}:00. come visit us or order online
+          </p>
+          <button className="btn">order</button>
+        </div>
+      )}
+    </footer>
   );
 }
 function Pizza(props) {
