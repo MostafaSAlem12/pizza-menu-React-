@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
-const pizzaData = [
+const pizzaData =
+  [
   {
     name: "Focaccia",
     ingredients: "Bread with italian olive oil and rosemary",
@@ -38,7 +39,6 @@ const pizzaData = [
     photoName: "pizzas/salamino.jpg",
     soldOut: true,
   },
-  
 ];
 
 function App() {
@@ -60,13 +60,19 @@ function Header() {
 }
 
 function Menu() {
+  const pizzas = pizzaData;
+  // const pizzas = [];
+  const pizzaNum = pizzas.length;
   return (
     <main className="menu">
       <h2>Our Menus</h2>
-      <ul className="pizzas">
-      {pizzaData.map((pizza) =>( <Pizza pizzaObj={pizza} key={pizza.name} />
-        ))}
-      </ul>
+      {pizzaNum>0  ? (
+        <ul className="pizzas">
+          {pizzaData.map((pizza) => (
+            <Pizza pizzaObj={pizza} key={pizza.name} />
+          ))}
+        </ul>
+      ) : <p>We're still working un our menu. Please come back later.</p>}
       {/* <Pizza
         name="Focaccia"
         photoName="/pizzas/focaccia.jpg"
@@ -94,13 +100,17 @@ function Footer() {
 
   return (
     <footer className="footer">
-      {isOpen && (
+      {isOpen ? (
         <div className="order">
           <p>
             We're open now until {closeHour}:00. come visit us or order online
           </p>
           <button className="btn">order</button>
         </div>
+      ) : (
+        <p>
+          We're happy to welcome you between {openHour}:00 AM. and {closeHour}:00 PM.
+        </p>
       )}
     </footer>
   );
@@ -108,7 +118,7 @@ function Footer() {
 function Pizza(props) {
   return (
     <li className="pizza">
-    <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name}/>
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
       <div>
         <h3>{props.pizzaObj.name}</h3>
         <p>{props.pizzaObj.ingredients}</p>
